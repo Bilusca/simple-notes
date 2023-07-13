@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 600 600">
+  <defs>
+    <pattern id="a" width="100" height="100" patternUnits="userSpaceOnUse">
+      <path stroke="#000" stroke-width="6" stroke-linecap="round" d="M0 25h50m0 50h50M3 0v100M50 0v100"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="#dedede" opacity="30%"/>
+  <rect width="100%" height="100%" fill="url(#a)"/>
+</svg>
