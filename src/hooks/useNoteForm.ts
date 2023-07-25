@@ -14,5 +14,12 @@ export function useNoteForm() {
     mode: 'onBlur',
   })
 
-  return { register, errors, handleSubmit, watch, reset, isSubmitting }
+  return {
+    register,
+    errors,
+    handleSubmit,
+    watch,
+    reset,
+    isSubmitting,
+  }
 }

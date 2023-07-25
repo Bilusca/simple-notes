@@ -9,6 +9,7 @@ import { NoteFormData } from '@/lib/noteResolver'
 import { Label } from '@radix-ui/react-label'
 import MDEditor from '@uiw/react-md-editor'
 import { useState } from 'react'
+import { TipTap } from '@/components/TipTap'
 
 export default function NewNote() {
   const { register, handleSubmit, errors, reset, isSubmitting } = useNoteForm()
@@ -17,6 +18,7 @@ export default function NewNote() {
   const dispatch = useDispatch()
 
   function handleMdValue(e: unknown) {
+    console.log(e)
     setMdValue(e as string)
   }
 
@@ -67,12 +69,7 @@ export default function NewNote() {
           >
             Content of note
           </Label>
-          <MDEditor
-            value={mdValue}
-            onChange={handleMdValue}
-            className="data-[error=true]:ring-red-600"
-            data-error={checkHasError(errors, 'content')}
-          />
+          <TipTap content={mdValue} onChange={handleMdValue} />
           <Textarea
             className="hidden"
             {...register('content', { value: mdValue })}
