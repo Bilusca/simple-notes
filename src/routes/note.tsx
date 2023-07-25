@@ -1,14 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../store'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
 import { Card, CardContent } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
-import { setNoteIsImportant } from '@/store/notes/notesSlice'
+import { deleteNote, setNoteIsImportant } from '@/store/notes/notesSlice'
+import { Button } from '@/components/ui/button'
+import { Pencil, Trash } from 'lucide-react'
 
 export default function Note() {
   const { noteId } = useParams()
+  const navigate = useNavigate()
 
   const note = useSelector((state: RootState) =>
     state.notes.find((note) => note.id === noteId),
@@ -18,6 +21,13 @@ export default function Note() {
   function handleChecked(checked: boolean) {
     if (noteId) {
       dispatch(setNoteIsImportant({ id: noteId, isImportant: checked }))
+    }
+  }
+
+  function handleDeleteNote() {
+    if (noteId) {
+      dispatch(deleteNote({ id: noteId }))
+      navigate('/')
     }
   }
 
@@ -39,7 +49,24 @@ export default function Note() {
             </div>
           </div>
           <Card className="border-2 border-gray-200 overflow-hidden pb-3">
-            <CardContent className="py-3">
+            <CardContent className="py-3 pr-14 relative">
+              <div className="absolute right-0 top-0 flex flex-col-reverse bg-gray-200/50">
+                <Button
+                  onClick={handleDeleteNote}
+                  size="icon"
+                  variant="ghost"
+                  className="hover:bg-red-500/10"
+                >
+                  <Trash className="text-red-700" />
+                </Button>
+                <Button
+                  size="icon"
+                  variant="ghost"
+                  className="hover:bg-blue-500/10"
+                >
+                  <Pencil className="text-blue-700" />
+                </Button>
+              </div>
               <ReactMarkdown
                 components={{
                   h1: ({ node, ...props }) => (

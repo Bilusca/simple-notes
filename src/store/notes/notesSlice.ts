@@ -14,7 +14,6 @@ const notesSlice = createSlice({
       state,
       action: PayloadAction<{ id: string; isImportant: boolean }>,
     ) => {
-      console.log('cai aqui set')
       state = state.map((note) => {
         if (note.id === action.payload.id) {
           return {
@@ -26,12 +25,15 @@ const notesSlice = createSlice({
         return note
       })
 
-      console.log(state)
+      return state
+    },
+    deleteNote: (state, action: PayloadAction<{ id: string }>) => {
+      state = state.filter((note) => note.id !== action.payload.id)
 
       return state
     },
   },
 })
 
-export const { setNote, setNoteIsImportant } = notesSlice.actions
+export const { setNote, setNoteIsImportant, deleteNote } = notesSlice.actions
 export default notesSlice.reducer
